@@ -1,4 +1,6 @@
-public class СyclesWhile {
+package src.cyclesWhile;
+
+public class Main {
     public static void main(String[] args) {
         ex01();
         ex02();

@@ -1,4 +1,6 @@
-public class СyclesFor {
+package src.cyclesFor;
+
+public class Main {
     public static void main(String[] args) {
         ex01();
         ex02();

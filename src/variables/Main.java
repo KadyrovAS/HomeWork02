@@ -1,4 +1,6 @@
-public class Variables{
+package src.variables;
+
+public class Main {
     public static void main(String[] args) {
         ex01();
         ex02();

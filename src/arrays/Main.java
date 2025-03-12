@@ -1,4 +1,6 @@
-public class Arrays {
+package src.arrays;
+
+public class Main {
     public static void main(String[] args) {
         ex01();
         ex02();

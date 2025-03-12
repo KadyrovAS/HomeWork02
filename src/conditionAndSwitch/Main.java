@@ -1,4 +1,6 @@
-public class СonditionAndSwitch {
+package src.conditionAndSwitch;
+
+public class Main {
     public static void main(String[] args) {
         ex01();
         ex02();

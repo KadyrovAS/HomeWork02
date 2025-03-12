@@ -1,4 +1,6 @@
-public class LearnObjects{
+package src.learnOject;
+
+public class Main {
     public static void main(String[] args) {
         Author authorFirst = new Author("Лев", "Толстой");
         Author authorSecond = new Author("Фёдор", "Достоевский");
