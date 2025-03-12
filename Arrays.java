@@ -1,8 +1,19 @@
 public class Arrays {
     public static void main(String[] args) {
-        int[] arrInt = new int[]{1, 2, 3};
-        double[] arrDouble = new double[]{1.57, 7.654, 9.986};
-        boolean[] arrBoolean = {true, false, true};
+        int[] arrInt = new int[3];
+        arrInt[0] = 1;
+        arrInt[1] = 2;
+        arrInt[2] = 3;
+
+        double[] arrDouble = new double[3];
+        arrDouble[0] = 1.57;
+        arrDouble[1] = 7.654;
+        arrDouble[2] = 9.986;
+
+        boolean[] arrBoolean = new boolean[3];
+        arrBoolean[0] = true;
+        arrBoolean[1] = false;
+        arrBoolean[2] = true;
 
         System.out.println("Задача 2");
         for (int i = 0; i < arrInt.length; i++) {
@@ -61,8 +72,11 @@ public class Arrays {
         System.out.println("Задача 4");
         for (int i = 0; i < arrInt.length; i++) {
             if (arrInt[i] % 2 != 0) {
+                arrInt[i] = arrInt[i] + 1;
+                System.out.println("Элемент массива №" + i + " был изменен на " + (arrInt[i]));
+            } else {
                 System.out.println("Элемент массива №" + i + " со значением " + arrInt[i] +
-                        " был изменен на " + (++arrInt[i]));
+                        " изменен не был!");
             }
         }
     }
