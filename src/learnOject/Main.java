@@ -9,5 +9,8 @@ public class Main {
         Book bookSecond = new Book("Преступление и наказание", authorSecond, 1866);
 
         bookFirst.setPublicationYear(1924);
+
+        System.out.println(bookFirst);
+        System.out.println(bookSecond);
     }
 }
