@@ -9,6 +9,7 @@ public class Author{
         this.surname = surname;
     }
 
+
     public String getSurname() {
         return surname;
     }
@@ -16,4 +17,5 @@ public class Author{
     public String getName() {
         return name;
     }
+
 }

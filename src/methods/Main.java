@@ -1,6 +1,8 @@
+package src.methods;
+
 import java.time.LocalDate;
 
-public class Methods{
+public class Main {
     public static void main(String[] args) {
         int year = 2025;
 
@@ -31,20 +33,21 @@ public class Methods{
     }
 
     public static boolean isLeapYear(int year) {
+        if (year < 1584) {
+            return false;
+        }
         if (year % 400 == 0) {
             return true;
         }
         if (year % 100 == 0) {
             return false;
         }
-        if (year % 4 == 0) {
-            return true;
-        }
-        return false;
+        return year % 4 == 0;
     }
 
     public static String getRecommendation(int year, int type) {
         int currentYear = LocalDate.now().getYear();
+
         if (year < currentYear && type == 0) {
             return "Установите облегченную версию приложения для iOS по ссылке";
         }
