@@ -1,8 +1,8 @@
 package src.courseProject;
 
 public class EmployeeBook {
-    private static int employeeCount; //индекс сотрудника в базе
-    private final int defaultNumberOfEmployees = 10; //количество сотрудников в базе по умолчанию
+    private static int employeeCount;
+    private final int defaultNumberOfEmployees = 10;
     private Employee[] employees;
 
     public EmployeeBook(int n) {
@@ -14,24 +14,29 @@ public class EmployeeBook {
         this.employees = new Employee[defaultNumberOfEmployees];
     }
 
-    //добавление нового сотрудника в базу
-    public boolean addEmployee(Employee employee) {
-        return addEmployee(employee, employee.getDepartmentNumber(), employee.getSalary());
-    }
+    /**
+     * Добавление нового сотрудника в базу данных
+     *
+     * @param employee
+     * @return
+     */
 
-    public boolean addEmployee(Employee employee, int departmentNumber, int salary) {
+    public boolean addEmployee(Employee employee) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
                 employees[i] = employee;
-                employee.setDepartmentNumber(departmentNumber);
-                employee.setSalary(salary);
                 return true;
             }
         }
         return false;
     }
 
-    //Выбор из базы сотрудника с заданным id
+    /**
+     * Выбор сотрудника из базы данных с заданным id
+     *
+     * @param id
+     * @return
+     */
     public Employee getEmployee(int id) {
         for (Employee employee : employees) {
             if (employee.getId() == id) {
@@ -42,7 +47,13 @@ public class EmployeeBook {
     }
 
 
-    //Удаление сотрудника из базы с заданным id
+    /**
+     * Удаление сотрудника из базы с заданным id
+     *
+     * @param id
+     * @return
+     */
+
     public boolean deleteEmployee(int id) {
         for (int i = 0; i < employees.length; i++) {
             if (employees[i].getId() == id) {
@@ -54,12 +65,13 @@ public class EmployeeBook {
     }
 
 
-    //Выбор сотрудника из базы с минимальной з/п
-    public Employee getEmployeeWithMinimumSalary() {
-        return getEmployeeWithMinimumSalary(0);
-    }
-
-
+    /**
+     * Выбор сотрудника с наименьшей з/п в отделе departmentNumber
+     * Если departmentNumber == 0, то возвращается сотрудник с наименьшей з/п во всей базе данных
+     *
+     * @param departmentNumber
+     * @return
+     */
     public Employee getEmployeeWithMinimumSalary(int departmentNumber) {
         Employee tempEmployee = null;
         for (Employee employee : employees) {
@@ -74,12 +86,13 @@ public class EmployeeBook {
         return tempEmployee;
     }
 
-
-    //Выбор сотрудника из базы с максимальной з/п
-    public Employee getEmployeeWithMaximumSalary() {
-        return getEmployeeWithMaximumSalary(0);
-    }
-
+    /**
+     * Выбор сотрудника с наибольшей з/п в отделе departmentNumber
+     * Если departmentNumber == 0, то возвращается сотрудник с наибольшей з/п во всей базе данных
+     *
+     * @param departmentNumber
+     * @return
+     */
     public Employee getEmployeeWithMaximumSalary(int departmentNumber) {
         Employee tempEmployee = null;
         for (Employee employee : employees) {
@@ -94,11 +107,14 @@ public class EmployeeBook {
         return tempEmployee;
     }
 
-    //Возвращает среднюю з/п
-    public double getAverageSalary() {
-        return getAverageSalary(0);
-    }
 
+    /**
+     * Возвращает среднюю з/п в отделе departmentNumber
+     * Если departmentNumber == 0, то возвращает среднюю з/п по всей базе данных
+     *
+     * @param departmentNumber
+     * @return
+     */
     public double getAverageSalary(int departmentNumber) {
         int countEmployees = 0;
         int totalSalary = 0;
@@ -117,11 +133,13 @@ public class EmployeeBook {
     }
 
 
-    //Общая сумма затрат на з/п
-    public int getTotalSalary() {
-        return getTotalSalary(0);
-    }
-
+    /**
+     * Общая сумма на з/п в месяц для отдела departmentNumber
+     * Если departmentNumber == 0, то возвращается общая сумма на з/п во всей базе данных
+     *
+     * @param departmentNumber
+     * @return
+     */
     public int getTotalSalary(int departmentNumber) {
         int total = 0;
         for (Employee employee : employees) {
@@ -135,7 +153,12 @@ public class EmployeeBook {
     }
 
 
-    //Список сотрудников отдела с заданным номером
+    /**
+     * Возвращает список сотрудников отдела с заданным номером
+     *
+     * @param departmentNumber
+     * @return
+     */
     public EmployeeBook getListOfDepartmentEmployees(int departmentNumber) {
         EmployeeBook employeeBook = new EmployeeBook();
         for (Employee employee : employees) {
@@ -150,11 +173,14 @@ public class EmployeeBook {
         return employeeBook;
     }
 
-    //Увеличение з/п на заданный процент
-    public void increaseSalaryByInterest(int percentage) {
-        increaseSalaryByInterest(percentage, 0);
-    }
 
+    /**
+     * Увеличение з/п на заданный процент сотрудникам в отделе departmentNumber
+     * Если departmentNumber == 0, то з/п увеличивается всем сотрудникам на заданный процент
+     *
+     * @param percentage
+     * @param departmentNumber
+     */
     public void increaseSalaryByInterest(int percentage, int departmentNumber) {
         int salary;
         for (Employee employee : employees) {
@@ -167,12 +193,15 @@ public class EmployeeBook {
         }
     }
 
-    //Получение списка работников с з/п больше заданной
-    public EmployeeBook getListOfEmployeesWithHigherSalary(int salary) {
-        return getListOfEmployeesWithHigherSalary(salary, 0);
-    }
 
-
+    /**
+     * Получение списка работников отдела departmentNumber с з/п больше заданной
+     * Если departmentNumber == 0, то возвращается список работников с з/п больше заданной из всей базы данных
+     *
+     * @param salary
+     * @param departmentNumber
+     * @return
+     */
     public EmployeeBook getListOfEmployeesWithHigherSalary(int salary, int departmentNumber) {
         EmployeeBook employeeBook = new EmployeeBook();
         for (Employee employee : employees) {
@@ -188,12 +217,14 @@ public class EmployeeBook {
     }
 
 
-    //Получение списка работников с зарплатой меньше заданной
-    public EmployeeBook getListOfEmployeesWithLowerSalary(int salary) {
-        return getListOfEmployeesWithLowerSalary(salary, 0);
-    }
-
-
+    /**
+     * Получение списка работников отдела departmentNumber с з/п меньше заданной
+     * Если departmentNumber == 0, то возвращается список работников с з/п меньше заданной из всей базы данных
+     *
+     * @param salary
+     * @param departmentNumber
+     * @return
+     */
     public EmployeeBook getListOfEmployeesWithLowerSalary(int salary, int departmentNumber) {
         EmployeeBook employeeBook = new EmployeeBook();
         for (Employee employee : employees) {

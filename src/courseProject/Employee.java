@@ -11,10 +11,12 @@ public class Employee {
     private int departmentNumber;
     private int salary;
 
-    public Employee(String surname, String name, String middleName) {
+    public Employee(String surname, String name, String middleName, int departmentNumber, int salary) {
         this.name = name;
         this.surname = surname;
         this.middleName = middleName;
+        this.departmentNumber = departmentNumber;
+        this.salary = salary;
         this.id = idCount;
         idCount++;
     }
