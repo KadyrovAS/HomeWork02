@@ -1,9 +1,8 @@
 package src.courseProject;
 
 public class EmployeeBook {
-    private static int employeeCount;
     private final int defaultNumberOfEmployees = 10;
-    private Employee[] employees;
+    private final Employee[] employees;
 
     public EmployeeBook(int n) {
         n = n <= 0 ? defaultNumberOfEmployees : n;

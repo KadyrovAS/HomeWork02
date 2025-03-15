@@ -4,10 +4,10 @@ import java.util.Objects;
 
 public class Employee {
     static private int idCount;
-    private String surname;
-    private String name;
-    private String middleName;
-    private int id;
+    private final String surname;
+    private final String name;
+    private final String middleName;
+    private final int id;
     private int departmentNumber;
     private int salary;
 
