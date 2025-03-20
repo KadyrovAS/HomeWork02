@@ -16,4 +16,10 @@ public class SimpleProduct extends Product{
         return this.price;
     }
 
+    @Override
+    public boolean isSpecial() {
+        return false;
+    }
+
+
 }
