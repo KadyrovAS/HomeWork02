@@ -9,7 +9,7 @@ import src.org.skypro.skyshop.product.SimpleProduct;
 import src.org.skypro.skyshop.search.SearchEngine;
 import src.org.skypro.skyshop.search.Searchable;
 
-public class App {
+public class app {
     public static void main(String[] args) {
         ProductBasket basket = new ProductBasket();
         basket.putProduct(new FixPriceProduct("Хлеб"));

@@ -2,9 +2,9 @@ package src.org.skypro.skyshop.search;
 
 
 public class SearchEngine {
-    private final int MAX_SEARCH = 5;
+    private final int maxSearch = 5;
     private int arraySize;
-    Searchable[] searchables;
+    private Searchable[] searchables;
 
 
     public SearchEngine(int arraySize) {
@@ -19,7 +19,7 @@ public class SearchEngine {
      * @return
      */
     public Searchable[] search(String search_line) {
-        Searchable[] arrSearchResult = new Searchable[MAX_SEARCH];
+        Searchable[] arrSearchResult = new Searchable[maxSearch];
         int count = 0;
         for (Searchable valueSearchable : this.searchables) {
             if (valueSearchable == null) {
@@ -28,7 +28,7 @@ public class SearchEngine {
             if (valueSearchable.getSearchTerm().contains(search_line)) {
                 arrSearchResult[count] = valueSearchable;
                 count++;
-                if (count == MAX_SEARCH) {
+                if (count == maxSearch) {
                     break;
                 }
             }
@@ -49,6 +49,5 @@ public class SearchEngine {
             }
         }
     }
-
 
 }

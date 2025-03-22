@@ -4,7 +4,7 @@ package src.org.skypro.skyshop.product;
  * Обычные товары
  */
 public class SimpleProduct extends Product{
-    int price;
+    private int price;
 
     public SimpleProduct(String productName, int price) {
         super(productName);
