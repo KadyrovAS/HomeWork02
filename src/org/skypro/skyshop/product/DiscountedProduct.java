@@ -3,7 +3,7 @@ package src.org.skypro.skyshop.product;
 /**
  * Товары с дисконтом
  */
-public class DiscountedProduct extends Product{
+public class DiscountedProduct extends Product {
     int price;
     int discount;
 
