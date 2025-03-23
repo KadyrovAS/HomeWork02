@@ -1,8 +1,9 @@
 package src.org.skypro.skyshop.search;
 
 
+import src.org.skypro.skyshop.exceptions.BestResultNotFound;
+
 public class SearchEngine {
-    private final int maxSearch = 5;
     private int arraySize;
     private Searchable[] searchables;
 
@@ -19,7 +20,7 @@ public class SearchEngine {
      * @return
      */
     public Searchable[] search(String search_line) {
-        Searchable[] arrSearchResult = new Searchable[maxSearch];
+        Searchable[] arrSearchResult = new Searchable[5];
         int count = 0;
         for (Searchable valueSearchable : this.searchables) {
             if (valueSearchable == null) {
@@ -28,7 +29,7 @@ public class SearchEngine {
             if (valueSearchable.getSearchTerm().contains(search_line)) {
                 arrSearchResult[count] = valueSearchable;
                 count++;
-                if (count == maxSearch) {
+                if (count == arrSearchResult.length) {
                     break;
                 }
             }
@@ -50,4 +51,28 @@ public class SearchEngine {
         }
     }
 
+    public Searchable getSearchTerm(String search) throws BestResultNotFound {
+        Searchable valueResult = null;
+        int maxNumberOfRepetitions = 0;
+        for (Searchable value : searchables) {
+            int count = 0;
+            if (value == null) {
+                continue;
+            }
+            int index = value.getSearchTerm().indexOf(search);
+            while (index != -1) {
+                count++;
+                index += search.length();
+                index = value.getSearchTerm().indexOf(search, index);
+            }
+            if (count > maxNumberOfRepetitions) {
+                maxNumberOfRepetitions = count;
+                valueResult = value;
+            }
+        }
+        if (valueResult == null) {
+            throw new BestResultNotFound(search);
+        }
+        return valueResult;
+    }
 }
