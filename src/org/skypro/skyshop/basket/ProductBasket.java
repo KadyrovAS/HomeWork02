@@ -2,7 +2,7 @@ package src.org.skypro.skyshop.basket;
 
 import src.org.skypro.skyshop.product.Product;
 
-public class ProductBasket{
+public class ProductBasket {
     private Product[] arProducts;
     private final int arSize = 5;
 
@@ -44,7 +44,7 @@ public class ProductBasket{
 
 
     /**
-     * проверяет наличие продукта в корзине по имени
+     * Проверяет наличие продукта в корзине по имени
      *
      * @param productName
      * @return
@@ -63,7 +63,7 @@ public class ProductBasket{
 
 
     /**
-     * очищает корзину
+     * Очищает корзину
      */
     public void toClearBasket() {
         for (int i = 0; i < arSize; i++) {
@@ -73,7 +73,7 @@ public class ProductBasket{
 
 
     /**
-     * печатает содержимое корзины
+     * Печатает содержимое корзины
      */
     public void toPrintBasket() {
         int countSpecialProduct = 0;
@@ -93,5 +93,14 @@ public class ProductBasket{
         }
         System.out.printf("Итого: %d\n", totalPrice);
         System.out.printf("Специальных товаров: %d\n", countSpecialProduct);
+    }
+
+    /**
+     * Возвращает корзину продуктов
+     *
+     * @return
+     */
+    public Product[] getProducts() {
+        return this.arProducts;
     }
 }
