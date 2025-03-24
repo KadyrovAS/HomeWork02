@@ -3,15 +3,12 @@ package src.org.skypro.skyshop.search;
 
 import src.org.skypro.skyshop.exceptions.BestResultNotFound;
 
-public class SearchEngine {
-    private int arraySize;
-    private Searchable[] searchables;
+import java.util.LinkedList;
+import java.util.List;
 
+public class SearchEngine{
 
-    public SearchEngine(int arraySize) {
-        this.arraySize = arraySize;
-        this.searchables = new Searchable[arraySize];
-    }
+    List<Searchable> listSearches = new LinkedList<>();
 
     /**
      * Возвращает массив элементов, содержащих строку поиска
@@ -19,22 +16,14 @@ public class SearchEngine {
      * @param search_line
      * @return
      */
-    public Searchable[] search(String search_line) {
-        Searchable[] arrSearchResult = new Searchable[5];
-        int count = 0;
-        for (Searchable valueSearchable : this.searchables) {
-            if (valueSearchable == null) {
-                continue;
-            }
+    public List<Searchable> search(String search_line) {
+        List<Searchable> listFindSearches = new LinkedList<>();
+        for (Searchable valueSearchable : this.listSearches) {
             if (valueSearchable.getSearchTerm().contains(search_line)) {
-                arrSearchResult[count] = valueSearchable;
-                count++;
-                if (count == arrSearchResult.length) {
-                    break;
-                }
+                listFindSearches.add(valueSearchable);
             }
         }
-        return arrSearchResult;
+        return listFindSearches;
     }
 
     /**
@@ -43,18 +32,20 @@ public class SearchEngine {
      * @param searchable
      */
     public void add(Searchable searchable) {
-        for (int i = 0; i < this.arraySize; i++) {
-            if (this.searchables[i] == null) {
-                searchables[i] = searchable;
-                return;
-            }
-        }
+        this.listSearches.add(searchable);
     }
 
+    /**
+     * Возвращает элемент, у которого больше всего повторов строки поиска
+     *
+     * @param search
+     * @return
+     * @throws BestResultNotFound
+     */
     public Searchable getSearchTerm(String search) throws BestResultNotFound {
         Searchable valueResult = null;
         int maxNumberOfRepetitions = 0;
-        for (Searchable value : searchables) {
+        for (Searchable value : this.listSearches) {
             int count = 0;
             if (value == null) {
                 continue;

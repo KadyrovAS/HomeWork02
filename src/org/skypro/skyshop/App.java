@@ -10,42 +10,50 @@ import src.org.skypro.skyshop.product.SimpleProduct;
 import src.org.skypro.skyshop.search.SearchEngine;
 import src.org.skypro.skyshop.search.Searchable;
 
-public class App {
+public class App{
     public static void main(String[] args) {
         ProductBasket basket = new ProductBasket();
         try {
             basket.putProduct(new FixPriceProduct("Хлеб"));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            basket.putProduct(new DiscountedProduct("Масло сливочное", 500, 110));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            basket.putProduct(new SimpleProduct("", 120));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-
-        try {
+            basket.putProduct(new DiscountedProduct("Масло сливочное", 500, 10));
+            basket.putProduct(new SimpleProduct("Молоко", 120));
             basket.putProduct(new SimpleProduct("Сахар", 50));
+            basket.putProduct(new SimpleProduct("Соль", 30));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
 
-        try {
-            basket.putProduct(new SimpleProduct("Соль", 0));
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Список продуктов в корзине:");
+        basket.toPrintBasket();
+        System.out.println();
 
-        SearchEngine searchEngine = new SearchEngine(10);
-        for (
-                Product product : basket.getProducts()) {
+        System.out.println("Удаляем продукт:");
+        System.out.println(basket.removeFromBasket("Сахар"));
+        System.out.println();
+
+        System.out.println("Остались продукты в корзине:");
+        basket.toPrintBasket();
+        System.out.println();
+
+        System.out.println("Удаляем несуществующий продукт:");
+        if (basket.removeFromBasket("Водка").size() == 0) {
+            System.out.println("Список удаленных продуктов пуст!");
+        }
+        System.out.println();
+
+        System.out.println("Содержимое корзины:");
+        basket.toPrintBasket();
+        System.out.println();
+
+        System.out.println("Содежимое корзины после удаления всех продуктов");
+        basket.toClearBasket();
+        basket.toPrintBasket();
+
+        System.out.println("-".repeat(50));
+        System.out.println("Тестирование SearchEngine");
+
+        SearchEngine searchEngine = new SearchEngine();
+        for (Product product : basket.getProducts()) {
             searchEngine.add(product);
         }
 
@@ -60,20 +68,20 @@ public class App {
         searchEngine.add(new
                 Article("О морковке", "В моркови больше сахара, чем в клубнике"));
 
-        for (
-                Searchable value : searchEngine.search("Хлеб")) {
-            if (value != null) {
-                System.out.println(value);
-            }
+        System.out.println("Поиск элементов, содержащих 'Хлеб'");
+        for (Searchable value : searchEngine.search("Хлеб")) {
+            System.out.println(value);
         }
 
         System.out.println();
         System.out.println("Демонстрация работы getSearchTerm и BestResultNotFound");
         try {
             Searchable findResult = searchEngine.getSearchTerm("Хлеб");
+            System.out.println(findResult);
             findResult = searchEngine.getSearchTerm("Булка");
+            System.out.println(findResult);
         } catch (BestResultNotFound e) {
-            System.out.println(e);
+            System.err.println(e);
         }
     }
 }
