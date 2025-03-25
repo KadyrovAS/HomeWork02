@@ -12,8 +12,8 @@ public abstract class Product implements Searchable{
         this.productName = productName;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return this.productName;
     }
 
     public abstract int getPrice();
@@ -22,7 +22,7 @@ public abstract class Product implements Searchable{
 
     @Override
     public String getSearchTerm() {
-        return getProductName();
+        return getName();
     }
 
     @Override
@@ -32,6 +32,6 @@ public abstract class Product implements Searchable{
 
     @Override
     public String toString() {
-        return getProductName() + ": " + getPrice();
+        return getName() + ": " + getPrice();
     }
 }

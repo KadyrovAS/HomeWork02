@@ -5,8 +5,10 @@ import src.org.skypro.skyshop.exceptions.BestResultNotFound;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class SearchEngine{
+public class SearchEngine {
 
     List<Searchable> listSearches = new LinkedList<>();
 
@@ -16,14 +18,14 @@ public class SearchEngine{
      * @param search_line
      * @return
      */
-    public List<Searchable> search(String search_line) {
-        List<Searchable> listFindSearches = new LinkedList<>();
+    public Map<String, Searchable> search(String search_line) {
+        Map<String, Searchable> mapSearchable = new TreeMap<>();
         for (Searchable valueSearchable : this.listSearches) {
             if (valueSearchable.getSearchTerm().contains(search_line)) {
-                listFindSearches.add(valueSearchable);
+                mapSearchable.put(valueSearchable.getName(), valueSearchable);
             }
         }
-        return listFindSearches;
+        return mapSearchable;
     }
 
     /**
