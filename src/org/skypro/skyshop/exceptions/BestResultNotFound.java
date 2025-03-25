@@ -1,7 +1,7 @@
 package src.org.skypro.skyshop.exceptions;
 
 public class BestResultNotFound extends Exception{
-    String searchLine;
+    private String searchLine;
     public BestResultNotFound(String searchLine){
         super(searchLine);
         this.searchLine = searchLine;
