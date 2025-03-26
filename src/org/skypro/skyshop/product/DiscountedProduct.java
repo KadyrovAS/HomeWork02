@@ -27,7 +27,7 @@ public class DiscountedProduct extends Product {
 
     @Override
     public String toString() {
-        return getProductName() + " со скидкой: " + getPrice() + " (" + discount + "%)";
+        return getName() + " со скидкой: " + getPrice() + " (" + discount + "%)";
     }
 
     @Override

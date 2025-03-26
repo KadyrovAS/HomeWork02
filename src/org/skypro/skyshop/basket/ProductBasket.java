@@ -2,12 +2,10 @@ package src.org.skypro.skyshop.basket;
 
 import src.org.skypro.skyshop.product.Product;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-public class ProductBasket{
-    private List<Product> listProducts = new LinkedList<>();
+public class ProductBasket {
+    private final Map<String, List<Product>> mapProducts = new HashMap<>();
 
     /**
      * Добавление продукта в корзину
@@ -16,7 +14,12 @@ public class ProductBasket{
      */
 
     public void putProduct(Product product) {
-        listProducts.add(product);
+        List<Product> listProduct = mapProducts.get(product.getName());
+        if (listProduct == null) {
+            listProduct = new LinkedList<>();
+        }
+        listProduct.add(product);
+        mapProducts.put(product.getName(), listProduct);
     }
 
 
@@ -27,8 +30,10 @@ public class ProductBasket{
      */
     public int getTotalProductPrice() {
         int totalPrice = 0;
-        for (Product product : listProducts) {
-            totalPrice += product.getPrice();
+        for (List<Product> listProducts : this.mapProducts.values()) {
+            for (Product product : listProducts) {
+                totalPrice += product.getPrice();
+            }
         }
         return totalPrice;
     }
@@ -41,15 +46,7 @@ public class ProductBasket{
      * @return
      */
     public boolean isProduct(String productName) {
-        for (Product product : listProducts) {
-            if (product == null) {
-                continue;
-            }
-            if (product.getProductName().equals(productName)) {
-                return true;
-            }
-        }
-        return false;
+        return this.mapProducts.containsKey(productName);
     }
 
 
@@ -57,7 +54,7 @@ public class ProductBasket{
      * Очищает корзину
      */
     public void toClearBasket() {
-        listProducts.clear();
+        this.mapProducts.clear();
     }
 
 
@@ -67,15 +64,17 @@ public class ProductBasket{
     public void toPrintBasket() {
         int countSpecialProduct = 0;
         int totalPrice = getTotalProductPrice();
-        if (listProducts.size() == 0) {
+        if (this.mapProducts.isEmpty()) {
             System.out.println("в корзине пусто");
             return;
         }
-        for (Product product : listProducts) {
-            if (product.isSpecial()) {
-                countSpecialProduct++;
+        for (List<Product> listProducts : this.mapProducts.values()) {
+            for (Product product : listProducts) {
+                if (product.isSpecial()) {
+                    countSpecialProduct++;
+                }
+                System.out.println(product);
             }
-            System.out.println(product);
         }
         System.out.printf("Итого: %d\n", totalPrice);
         System.out.printf("Специальных товаров: %d\n", countSpecialProduct);
@@ -87,27 +86,26 @@ public class ProductBasket{
      * @return
      */
     public List<Product> getProducts() {
-        return this.listProducts;
+        List<Product> listProducts = new LinkedList<>();
+        for (List<Product> list : mapProducts.values()) {
+            listProducts.addAll(list);
+        }
+        return listProducts;
     }
 
     /**
-     * Удаляет продукты из корзины с заданным именем
+     * Удаляет продукты из корзины с заданным именем.
      * Возвращает список удаленных продуктов
      *
      * @param productName
      * @return
      */
     public List<Product> removeFromBasket(String productName) {
-        Iterator<Product> iterator = listProducts.iterator();
-        List<Product> listRemovedProducts = new LinkedList<>();
-
-        while (iterator.hasNext()) {
-            Product product = iterator.next();
-            if (product.getProductName().equals(productName)) {
-                listRemovedProducts.add(product);
-                iterator.remove();
-            }
+        List<Product> listRemovedProducts = mapProducts.get(productName);
+        if (listRemovedProducts == null) {
+            return new LinkedList<>();
         }
+        mapProducts.remove(productName);
         return listRemovedProducts;
     }
 

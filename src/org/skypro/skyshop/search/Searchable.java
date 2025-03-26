@@ -5,6 +5,7 @@ public interface Searchable {
 
     public String getContentType();
 
+    public String getName();
     public default String getStringRepresentation() {
         return getSearchTerm() + " - " + getContentType();
     }
