@@ -24,4 +24,5 @@ public class FixPriceProduct extends Product {
     public boolean isSpecial() {
         return true;
     }
+
 }

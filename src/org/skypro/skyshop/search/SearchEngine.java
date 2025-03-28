@@ -3,10 +3,7 @@ package src.org.skypro.skyshop.search;
 
 import src.org.skypro.skyshop.exceptions.BestResultNotFound;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
 
@@ -18,14 +15,14 @@ public class SearchEngine {
      * @param search_line
      * @return
      */
-    public Map<String, Searchable> search(String search_line) {
-        Map<String, Searchable> mapSearchable = new TreeMap<>();
+    public Set<Searchable> search(String search_line) {
+        Set<Searchable> searchableSet = new TreeSet<>();
         for (Searchable valueSearchable : this.listSearches) {
             if (valueSearchable.getSearchTerm().contains(search_line)) {
-                mapSearchable.put(valueSearchable.getName(), valueSearchable);
+                searchableSet.add(valueSearchable);
             }
         }
-        return mapSearchable;
+        return searchableSet;
     }
 
     /**
