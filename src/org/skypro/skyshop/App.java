@@ -11,8 +11,9 @@ import src.org.skypro.skyshop.search.SearchEngine;
 import src.org.skypro.skyshop.search.Searchable;
 
 import java.util.Map;
+import java.util.Set;
 
-public class App{
+public class App {
     public static void main(String[] args) {
         ProductBasket basket = new ProductBasket();
         try {
@@ -71,7 +72,7 @@ public class App{
                 Article("О морковке", "В моркови больше сахара, чем в клубнике"));
 
         System.out.println("Поиск элементов, содержащих 'Хлеб'");
-        for (Map.Entry<String, Searchable> value: searchEngine.search("Хлеб").entrySet()) {
+        for (Searchable value : searchEngine.search("Хлеб")) {
             System.out.println(value);
         }
 
